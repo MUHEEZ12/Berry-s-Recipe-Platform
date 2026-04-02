@@ -1,0 +1,579 @@
+﻿/* ============================================================================
+   ROOT STYLES & CSS VARIABLES
+   ============================================================================ */
+
+:root {
+  /* Primary Colors */
+  --primary: #ff6b6b;
+  --primary-light: #ff8787;
+  --primary-dark: #e84545;
+  
+  /* Secondary Colors */
+  --secondary: #4ecdc4;
+  --secondary-light: #6ee7de;
+  --secondary-dark: #2da8a1;
+  
+  /* Neutral Colors - Light Mode */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f1f3f5;
+  
+  /* Text Colors - Light Mode */
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-tertiary: #95a5a6;
+  --text-muted: #95a5a6;
+  
+  /* Border & Shadow */
+  --border-color: #e0e6ed;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  
+  /* Typography */
+  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --font-mono: 'SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo',
+    monospace;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* Z-index Scale */
+  --z-dropdown: 1000;
+  --z-sticky: 900;
+  --z-fixed: 1050;
+  --z-modal: 1200;
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #242424;
+  --bg-tertiary: #2d2d2d;
+  
+  --text-primary: #f5f5f5;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #6b6b6b;
+  --text-muted: #6b6b6b;
+  
+  --border-color: #3a3a3a;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+/* ============================================================================
+   GLOBAL STYLES
+   ============================================================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color var(--transition-base),
+              color var(--transition-base);
+  overflow-x: hidden;
+}
+
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.1rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-secondary);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--primary-light);
+}
+
+/* ============================================================================
+   FORMS
+   ============================================================================ */
+
+input, textarea, select {
+  font-family: var(--font-family);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+
+button {
+  font-family: var(--font-family);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-fast);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   UTILITIES
+   ============================================================================ */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: var(--spacing-sm);
+}
+
+.gap-md {
+  gap: var(--spacing-md);
+}
+
+.gap-lg {
+  gap: var(--spacing-lg);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.visible {
+  display: block !important;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================================================
+   RESPONSIVE UTILITIES
+   ============================================================================ */
+
+/* Tablet & iPad Responsiveness */
+@media (max-width: 1024px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+/* Standard Tablet Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --spacing-lg: 20px;
+    --spacing-md: 14px;
+    --spacing-xl: 28px;
+  }
+  
+  body {
+    font-size: 15px;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  h3 {
+    font-size: 1.25rem;
+  }
+  
+  .container {
+    padding: 0 var(--spacing-sm);
+  }
+  
+  button, input, textarea, select {
+    min-height: 44px;
+  }
+}
+
+/* Mobile Phone Responsiveness */
+@media (max-width: 480px) {
+  :root {
+    --spacing-lg: 16px;
+    --spacing-md: 12px;
+    --spacing-xl: 20px;
+    font-size: 14px;
+  }
+  
+  h1 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+  
+  h2 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+  }
+  
+  h3 {
+    font-size: 1.1rem;
+  }
+  
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Touch-friendly form inputs */
+  button, input, textarea, select {
+    min-height: 48px;
+    min-width: 48px;
+    font-size: 16px;
+    padding: 12px 16px !important;
+  }
+  
+  button {
+    padding: 12px 20px !important;
+  }
+  
+  /* Increase tap targets */
+  a {
+    padding: 8px 0;
+    display: inline-block;
+  }
+}
+
+/* ============================================================================
+   SCROLLBAR STYLING
+   ============================================================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-dark);
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================================
+   SELECTION
+   ============================================================================ */
+
+::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* ============================================================================
+   GLOBAL MOBILE RESPONSIVENESS
+   ============================================================================ */
+
+/* Touch-friendly input and button sizing for all devices */
+@media (max-width: 480px) {
+  input,
+  textarea,
+  select,
+  button:not(.icon-btn),
+  a.btn,
+  [role="button"] {
+    font-size: 16px;
+    min-height: 44px;
+    padding: 11px 16px;
+    touch-action: manipulation;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    min-height: 24px;
+  }
+
+  /* Prevent horizontal scroll on mobile */
+  body, html {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Ensure text is readable on mobile */
+  body {
+    font-size: 16px;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+  h4 { font-size: 1.1rem; }
+  h5 { font-size: 1rem; }
+  h6 { font-size: 0.95rem; }
+
+  /* Improve form usability on mobile */
+  form {
+    width: 100%;
+  }
+
+  .form-group,
+  .form-field {
+    margin-bottom: 16px;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  /* Ensure buttons are easily tappable */
+  button,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  a.btn {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+}
+
+/* Extra small mobile (375px and below) */
+@media (max-width: 375px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+  h4 { font-size: 1rem; }
+  h5 { font-size: 0.95rem; }
+  h6 { font-size: 0.9rem; }
+
+  input,
+  textarea,
+  select,
+  button:not(.icon-btn) {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+}

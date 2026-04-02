@@ -1,0 +1,172 @@
+/* Custom Select Component */
+.custom-select-container {
+  position: relative;
+  width: 100%;
+  z-index: 1000;
+}
+
+.custom-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.custom-select-button:hover {
+  border-color: var(--primary);
+  background-color: var(--bg-primary);
+}
+
+.custom-select-button:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.custom-select-button .chevron {
+  width: 18px;
+  height: 18px;
+  color: var(--primary);
+  transition: transform 200ms ease;
+  flex-shrink: 0;
+}
+
+.custom-select-button .chevron.open {
+  transform: rotate(180deg);
+}
+
+.custom-select-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.custom-select-menu {
+  position: absolute;
+  left: 0;
+  right: 0;
+  min-width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1001;
+  max-height: 250px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-select-menu.bottom {
+  top: calc(100% + 8px);
+}
+
+.custom-select-menu.top {
+  bottom: calc(100% + 8px);
+  top: auto;
+}
+
+.custom-select-option {
+  padding: 12px 16px;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: 500;
+  width: 100%;
+}
+
+.custom-select-option:hover {
+  background: var(--bg-secondary);
+  color: var(--primary);
+}
+
+.custom-select-option.active {
+  background: linear-gradient(135deg, var(--primary)10 0%, var(--primary)05 100%);
+  color: var(--primary);
+  font-weight: 700;
+  border-left: 3px solid var(--primary);
+}
+
+.custom-select-option:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.custom-select-option:last-child {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* Scrollbar styling for dropdown */
+.custom-select-menu::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-select-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-select-menu::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+.custom-select-menu::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Dark mode */
+body.dark-mode .custom-select-button {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+body.dark-mode .custom-select-button:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .custom-select-menu {
+  background: var(--bg-secondary);
+  border-color: var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .custom-select-option {
+  color: var(--text-primary);
+}
+
+body.dark-mode .custom-select-option:hover {
+  background: var(--bg-primary);
+}
+
+body.dark-mode .custom-select-option.active {
+  background: rgba(255, 107, 107, 0.15);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .custom-select-menu {
+    max-height: 200px;
+  }
+
+  .custom-select-option {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+}
