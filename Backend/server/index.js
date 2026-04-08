@@ -95,7 +95,7 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 4000;
-const MONGO = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/berryrecipes';
+const MONGO = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/berryrecipes';
 
 mongoose
   .connect(MONGO, { 
