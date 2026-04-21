@@ -29,7 +29,7 @@ app.use(helmet.contentSecurityPolicy({
 // Middleware
 app.use(morgan('dev'));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL || ['http://localhost:5173', 'http://localhost:5174'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -97,6 +97,21 @@ app.use(errorHandler);
 const PORT = process.env.PORT || 4000;
 const MONGO = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/berryrecipes';
 
+const startServer = (message) => {
+  const server = app.listen(PORT, () => {
+    console.log(message);
+  });
+
+  server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`❌ Port ${PORT} already in use. Stop the other process or set PORT to a different value.`);
+    } else {
+      console.error('❌ Server error:', err);
+    }
+    process.exit(1);
+  });
+};
+
 mongoose
   .connect(MONGO, { 
     useNewUrlParser: true, 
@@ -106,18 +121,14 @@ mongoose
   })
   .then(() => {
     console.log('✅ Connected to MongoDB');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server listening on http://localhost:${PORT}`);
-      console.log(`📝 API docs: http://localhost:${PORT}/api`);
-    });
+    startServer(`🚀 Server listening on http://localhost:${PORT}`);
+    console.log(`📝 API docs: http://localhost:${PORT}/api`);
   })
   .catch((err) => {
     console.error('❌ MongoDB connection error:', err.message);
     console.log('⚠️  Starting server without database...');
-    app.listen(PORT, () => {
-      console.log(`🚀 Server listening (no DB) on http://localhost:${PORT}`);
-      console.log('   Visit http://localhost:4000/health to verify backend');
-    });
+    startServer(`🚀 Server listening (no DB) on http://localhost:${PORT}`);
+    console.log('   Visit http://localhost:4000/health to verify backend');
   });
 
 
